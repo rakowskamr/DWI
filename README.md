@@ -15,31 +15,31 @@ Output: Statistical test results for FA (fractional anisotropy), MD (mean diffus
 * DWI_proc_DTI_maps
 * DWI_proc_CHARMED_fit
 * DWI_proc_CHARMED_maps
-*-> output: Fr maps
+* -> output: Fr maps
 
 2. FSL DTIfit
 * dtifit_fsl_bmax1500_final.sh 
-*-> output: MD/FA maps
+* -> output: MD/FA maps
 
 3. Coregister, normalise, smooth in SPM
 * extract the brain first (from T1) 
 * coregister DWI images to a brain extracted T1 image
 * smooth with 8 mm Gaussian kernel
-*-> output: swFA/MD/FR
+* -> output: swFA/MD/FR
 
 4. Prepare images
 * Copy files to the FinalFSLDTI folder (S1, S2, S3), subtract sessions and put the subtraction files in the relevant folders (S1S2, S2S3, S1S3)
 * Merge images into a single 4D file using fslmerge.
 * The 4D file will be used as the only image for the design matrix so each design matrix needs to have a separate 4D file.
 * fslmerge merges the files in its own order, check it with ‘ls’. That order needs to match the order of participants in the design matrix
-*-> 4D file
+* -> 4D file
 
 7. GLM
 * open FSL > MISC > GLM setup > higher level
 * use 1 EV for a simple 1-way t-test; 2 EVs for 1 way t-test with covs
 * set EV1 as 1 for everyone; set EV2 as the actual covariate value
 * set the contrast to either [1] or [0 1] (or negative 1)
-*-> design matrix
+* -> design matrix
 
 8. FSL Randomise (https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/Randomise/UserGuide)
 * use fsl randomise
