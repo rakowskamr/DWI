@@ -1,4 +1,4 @@
-# DWI
+# DWI_analysis
 Analysis pipeline for diffusion-weighted MRI (DWI). 
 Input: Multi-shell DWI data (here the Composite Hindered and Restricted Model of Diffusion, CHARMED)
 Output: Statistical test results for FA (fractional anisotropy), MD (mean diffusivity), and Fr (restricted water fraction) maps. 
