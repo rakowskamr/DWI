@@ -36,20 +36,20 @@ Output: Statistical test results for FA (fractional anisotropy), MD (mean diffus
 * fslmerge merges the files in its own order, check the order with with ‘ls’. That order needs to match the order of participants in the design matrix
 * -> 4D file
 
-7. GLM
+7. Create General Linear Model (GLM) and the design matrix
 * open FSL > MISC > GLM setup > higher level
 * use 1 EV for a simple 1-way t-test; 2 EVs for 1 way t-test with covs
 * to run a correlation, set EV1 as 1 for everyone; set EV2 as the actual covariate value
 * set the contrast to either [1] or [0 1] (or negative 1)
 * -> design matrix
 
-8. FSL Randomise (https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/Randomise/UserGuide)
+8. Run FSL Randomise (https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/Randomise/UserGuide)
 * use fsl randomise
 * input: fsl merge 4D file
 * output: output directory
 * requires a design matrix and a mask
 
-9. FSL Palm (https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/PALM)
+9. or run FSL PALM (https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/PALM)
 * use fsl palm
 * input: fsl merge 4D file
 * output: output directory
