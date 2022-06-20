@@ -40,7 +40,7 @@ Output: Statistical test results for FA (fractional anisotropy), MD (mean diffus
   * fslmerge merges the files in its own order, check the order with with ‘ls’. That order needs to match the order of participants in the design matrix
 * -> 4D file
 
-FSL-GUI-STEP: Create General Linear Model (GLM) and the design matrix using FSL GUI
+FSL-GUI-STEP: Create General Linear Model (GLM) and design matrix using FSL GUI
 * open FSL > MISC > GLM setup > higher level
 * use 1 EV for a simple 1-way t-test; 2 EVs for 1 way t-test with covs
 * to run a correlation, set EV1 as 1 for everyone; set EV2 as the actual covariate value
@@ -71,8 +71,8 @@ The pipeline requires MATLAB with SPM12 toolbox (https://www.fil.ion.ucl.ac.uk/s
 
 # Authors and contributors
 * Martyna Rakowska
-* Mara Cercignani
 * Alberto Lazari
+* Mara Cercignani
 
 # Relevant methods section from Rakowska et al. (2022):
 
