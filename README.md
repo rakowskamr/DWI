@@ -67,7 +67,7 @@ FSL-GUI-STEP: Create General Linear Model (GLM) and design matrix using FSL GUI
 
 # Requirements
 
-The pipeline requires MATLAB with SPM12 toolbox (https://www.fil.ion.ucl.ac.uk/spm/), FSL (https://fsl.fmrib.ox.ac.uk/fsl/fslwiki) and the Modular pipeline developed by Chantal Tax and Greg Parker (see Tax et al., 2021; Genc et al., 2020). Use MicroGL (https://www.nitrc.org/projects/mricrogl) to view the resulting images.
+The pipeline requires MATLAB with SPM12 toolbox (https://www.fil.ion.ucl.ac.uk/spm/), FSL (https://fsl.fmrib.ox.ac.uk/fsl/fslwiki) and the Modular pipeline developed by Chantal Tax and Greg Parker (see Tax et al., 2021; Genc et al., 2020). Use MicroGL (https://www.nitrc.org/projects/mricrogl) to display results.
 
 # Authors and contributors
 * Martyna Rakowska
