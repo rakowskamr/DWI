@@ -1,6 +1,6 @@
 # DWI
 Analysis pipeline for diffusion-weighted MRI (DWI). 
-Input: Multi-shell DWI data (here CHARMED)
+Input: Multi-shell DWI data (here the Composite Hindered and Restricted Model of Diffusion, CHARMED)
 Output: Statistical test results for FA (fractional anisotropy), MD (mean diffusivity), and Fr (restricted water fraction) maps. 
 
 # The analysis step-by-step 
@@ -8,13 +8,13 @@ Output: Statistical test results for FA (fractional anisotropy), MD (mean diffus
 1. Modular pipeline
 * CHARMED_pipeline_Modular_DTI_CHARMED_IRLLS.xml - exemplar pre-processing pipeline with the following steps:
   * Supp_human_bet_mask
-  * DWI_proc_SOLID - perform SOLID outlier detection on targeted DW images
-  * DWI_proc_gibbs_SubVoxShift - Gibs ringing correction/artifact removal based on local subvoxel-shifts
+  * DWI_proc_SOLID - perform Slicewise OutLIer Detection (SOLID) outlier detection on targeted DW images
+  * DWI_proc_gibbs_SubVoxShift - full Fourier Gibs ringing correction/artifact removal based on local subvoxel-shifts 
   * DWI_sort_refPA - attaches a refPA object to your data
-  * DWI_proc_TED - combined topup, eddy and disco (gradnonlin) correction for datasets with a PA B0 reference volume 
+  * DWI_proc_TED - combined topup, eddy and disco (gradnonlin) correction to (i) estimate susceptibility-induced off-resonance field and correct for the resulting distortions using images with reversed phase-encoding directions, (ii) correct for eddy current distortions and (iii) correct for gradient nonlinearity
   * (optional: DWI_proc_DTI_fit -> choose nonlinear DTI fitting routine & maxb value = 1500!)
   * (optional: DWI_proc_DTI_maps - produce DTI maps from previous fit results)
-  * DWI_proc_CHARMED_fit - selection of CHARMED fitting routines
+  * DWI_proc_CHARMED_fit - selection of CHARMED fitting routines used to estimate Fr metric, non-linear least square fitting algorithm is recommended
   * DWI_proc_CHARMED_maps - takes the 15-28 CHARMED parameters and turns them into Fr maps
   * -> output: Fr maps
 * Modular_subject_pipeline_p5.xml - exemplar file with subject directories for the analysis
@@ -23,12 +23,12 @@ Output: Statistical test results for FA (fractional anisotropy), MD (mean diffus
 * SUBJECTS.txt - list of participants requited for RunOnClusternew.sh to run
 
 2. FSL DTIfit
-* compute_DTI_martyna.csh - extract shells with b < 1500 (only for multishell data)
-* dtifit_fsl_bmax1500.sh - fit DTI tensor
+* compute_DTI_martyna.csh - extract shells with b < 1500 s/mm2 (only for multishell data)
+* dtifit_fsl_bmax1500.sh - fit diffusion tensor model to the data to generate MD and FA maps
 * -> output: MD/FA maps
 
 3. Coregister, normalise, smooth in SPM
-* CoregisterNormalise.m - extract the brain from a T1w image and coregister DWI images to a brain extracted T1w image
+* CoregisterNormalise.m - extract the brain from a T1w image and coregister DWI images with participant's own brain extracted T1w image; normalise the output to MNI space
 * Smooth.m - smooth with 8 mm Gaussian kernel
 * -> output: swFA/MD/FR
 
@@ -76,9 +76,10 @@ The pipeline requires MATLAB with SPM12 toolbox (https://www.fil.ion.ucl.ac.uk/s
 
 # Relevant methods section from Rakowska et al. (2022):
 
-DW-MRI data pre-processing was performed as described in previous publications 71,72. The pre-processing steps included (1) Slicewise OutLIer Detection (SOLID) 73; (2) full Fourier Gibbs ringing correction 74 using Mrtrix mrdegibbs software 75; and (3) a combined topup, eddy and DISCO step 76 to (i) estimate susceptibility-induced off-resonance field and correct for the resulting distortions using images with reversed phase-encoding directions, (ii) correct for eddy current distortions and (iii) correct for gradient nonlinearity. To generate Mean Diffusivity (MD) maps, the diffusion tensor model was fitted to the data using the DTIFIT command in FSL for shells with b < 1500 s/mm2. To estimate Restricted Water Fraction (Fr) metric, the composite hindered and restricted model of diffusion (CHARMED) was fitted to the data using an in-house non-linear least square fitting algorithm 77 coded in MATLAB 2015a. The two indices (MD, Fr) were chosen based on the existing human literature on the microstructural changes following learning (MD: 26,27,29,30 Fr: 28). MD describes the average mobility of water molecules and has shown sensitivity to changes in grey matter 26,29,30. MD is thought to reflect the underlying, learning-dependent remodelling of neurons and glia, i.e., synaptogenesis, astrocytes activation and brain-derived neurotrophic factor (BDNF) expression, as confirmed by histological findings 26, which were of particular interest in this study. As opposed to DTI, the CHARMED model separates the contribution of water diffusion from the extra-axonal (hindered) and intra-axonal (restricted) space 32, thereby providing a more sensitive method to look at the microstructural changes than DTI 28. Fr is one of the outputs from the CHARMED framework. In grey matter, Fr changes are thought to reflect remodelling of dendrites and glia, and were observed both short-term (2 h) and long-term (1 week) following a spatial navigation task 28.
-
-Co-registration, spatial normalisation and smoothing of the MD and Fr maps were performed in SPM12, running under MATLAB 2015a. First, we co-registered the pre-processed diffusion images with participants’ structural images using a rigid body model. The co-registration output was then spatially normalised to MNI space. This step involved resampling to 2 mm voxel with B-spline interpolation and utilised T1 deformation fields generated during fMRI analysis of the same participants 24. That way, the resulting diffusion images were in the same space as the fMRI and T1w data. Finally, the normalised data was smoothed with an 8 mm FWHM Gaussian kernel.
+5.7.2 DW-MRI DATA PRE-PROCESSING
+5.7.3.2 MULTIMODAL ANALYSIS
+5.7.3.3 UNIMODAL ANALYSIS
+5.7.3.4 REGIONS OF INTEREST
 
 # References
 * Tax, C. M., Kleban, E., Chamberland, M., Baraković, M., Rudrapatna, U., & Jones, D. K. (2021). Measuring compartmental T2-orientational dependence in human brain white matter using a tiltable RF coil and diffusion-T2 correlation MRI. NeuroImage, 236, 117967.
