@@ -14,11 +14,11 @@ Output: Statistical test results for FA (fractional anisotropy), MD (mean diffus
 * (optional: DWI_proc_DTI_fit -> choose nonlinear DTI fitting routine & maxb value = 1500!)
 * (optional: DWI_proc_DTI_maps - produce DTI maps from previous fit results)
 * DWI_proc_CHARMED_fit - selection of CHARMED fitting routines
-* DWI_proc_CHARMED_maps - takes the 15-28 charmed parameters and turns them into Fr maps
+* DWI_proc_CHARMED_maps - takes the 15-28 CHARMED parameters and turns them into Fr maps
 * -> output: Fr maps
 
 2. FSL DTIfit
-* compute_DTI_martyna - extract shells with b < 1500
+* compute_DTI_martyna - extract shells with b < 1500 (only for multishell data)
 * dtifit_fsl_bmax1500_final.sh - fit DTI tensor
 * -> output: MD/FA maps
 
