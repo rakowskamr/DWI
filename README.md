@@ -7,37 +7,38 @@ Output: Statistical test results for FA (fractional anisotropy), MD (mean diffus
 
 1. Preprocessing, aka the 'Modular pipeline' steps
 * Supp_human_bet_mask
-* DWI_proc_SOLID
-* DWI_proc_gibbs_SubVoxShift
-* DWI_sort_refPA
-* DWI_proc_TED
-* DWI_proc_DTI_fit -> choose nonlinear & maxb value = 1500!
-* DWI_proc_DTI_maps
-* DWI_proc_CHARMED_fit
-* DWI_proc_CHARMED_maps
+* DWI_proc_SOLID - perform SOLID outlier detection on targeted DW images
+* DWI_proc_gibbs_SubVoxShift - Gibs ringing correction/artifact removal based on local subvoxel-shifts
+* DWI_sort_refPA - attaches a refPA object to your data
+* DWI_proc_TED - combined topup, eddy and disco (gradnonlin) correction for datasets with a PA B0 reference volume 
+* (optional: DWI_proc_DTI_fit -> choose nonlinear DTI fitting routine & maxb value = 1500!)
+* (optional: DWI_proc_DTI_maps - produce DTI maps from previous fit results)
+* DWI_proc_CHARMED_fit - selection of CHARMED fitting routines
+* DWI_proc_CHARMED_maps - takes the 15-28 charmed parameters and turns them into Fr maps
 * -> output: Fr maps
 
 2. FSL DTIfit
-* dtifit_fsl_bmax1500_final.sh 
+* compute_DTI_martyna - extract shells with b < 1500
+* dtifit_fsl_bmax1500_final.sh - fit DTI tensor
 * -> output: MD/FA maps
 
 3. Coregister, normalise, smooth in SPM
-* extract the brain first (from T1) 
-* coregister DWI images to a brain extracted T1 image
+* extract the brain from a T1w image
+* coregister DWI images to a brain extracted T1w image
 * smooth with 8 mm Gaussian kernel
 * -> output: swFA/MD/FR
 
 4. Prepare images
 * Copy files to the FinalFSLDTI folder (S1, S2, S3), subtract sessions and put the subtraction files in the relevant folders (S1S2, S2S3, S1S3)
-* Merge images into a single 4D file using fslmerge.
-* The 4D file will be used as the only image for the design matrix so each design matrix needs to have a separate 4D file.
-* fslmerge merges the files in its own order, check it with ‘ls’. That order needs to match the order of participants in the design matrix
+* Merge images into a single 4D file using fslmerge
+* The 4D file will be used as the only image for the design matrix so each design matrix needs to have a separate 4D file
+* fslmerge merges the files in its own order, check the order with with ‘ls’. That order needs to match the order of participants in the design matrix
 * -> 4D file
 
 7. GLM
 * open FSL > MISC > GLM setup > higher level
 * use 1 EV for a simple 1-way t-test; 2 EVs for 1 way t-test with covs
-* set EV1 as 1 for everyone; set EV2 as the actual covariate value
+* to run a correlation, set EV1 as 1 for everyone; set EV2 as the actual covariate value
 * set the contrast to either [1] or [0 1] (or negative 1)
 * -> design matrix
 
