@@ -7,16 +7,16 @@ Output: Statistical test results for FA (fractional anisotropy), MD (mean diffus
 
 1. Modular pipeline
 * CHARMED_pipeline_Modular_DTI_CHARMED_IRLLS.xml - exemplar pre-processing pipeline with the following steps:
- * Supp_human_bet_mask
- * DWI_proc_SOLID - perform SOLID outlier detection on targeted DW images
- * DWI_proc_gibbs_SubVoxShift - Gibs ringing correction/artifact removal based on local subvoxel-shifts
- * DWI_sort_refPA - attaches a refPA object to your data
- * DWI_proc_TED - combined topup, eddy and disco (gradnonlin) correction for datasets with a PA B0 reference volume 
- * (optional: DWI_proc_DTI_fit -> choose nonlinear DTI fitting routine & maxb value = 1500!)
- * (optional: DWI_proc_DTI_maps - produce DTI maps from previous fit results)
- * DWI_proc_CHARMED_fit - selection of CHARMED fitting routines
- * DWI_proc_CHARMED_maps - takes the 15-28 CHARMED parameters and turns them into Fr maps
- * -> output: Fr maps
+  * Supp_human_bet_mask
+  * DWI_proc_SOLID - perform SOLID outlier detection on targeted DW images
+  * DWI_proc_gibbs_SubVoxShift - Gibs ringing correction/artifact removal based on local subvoxel-shifts
+  * DWI_sort_refPA - attaches a refPA object to your data
+  * DWI_proc_TED - combined topup, eddy and disco (gradnonlin) correction for datasets with a PA B0 reference volume 
+  * (optional: DWI_proc_DTI_fit -> choose nonlinear DTI fitting routine & maxb value = 1500!)
+  * (optional: DWI_proc_DTI_maps - produce DTI maps from previous fit results)
+  * DWI_proc_CHARMED_fit - selection of CHARMED fitting routines
+  * DWI_proc_CHARMED_maps - takes the 15-28 CHARMED parameters and turns them into Fr maps
+  * -> output: Fr maps
 * Modular_subject_pipeline_p5.xml - exemplar file with subject directories for the analysis
 * ModularPipelineBash.m - identifies the .xml files and runs the preprocessing for selected participant
 * RunOnClusternew.sh - sends ModularPipelineBash.m to the cluster to preprocess all participants in parallel
@@ -36,8 +36,8 @@ Output: Statistical test results for FA (fractional anisotropy), MD (mean diffus
 * CopyFiles.m - Copy files to the FinalFSLDTI folder (S1, S2, S3)
 * SubtractImages.m - Subtract sessions and put the subtraction files in the relevant folders (S1S2, S2S3, S1S3)
 * 4DMerge.sh - Merge images into a single 4D file using fslmerge
- * The 4D file will be used as the only image for the design matrix so each design matrix needs to have a separate 4D file
- * fslmerge merges the files in its own order, check the order with with ‘ls’. That order needs to match the order of participants in the design matrix
+  * The 4D file will be used as the only image for the design matrix so each design matrix needs to have a separate 4D file
+  * fslmerge merges the files in its own order, check the order with with ‘ls’. That order needs to match the order of participants in the design matrix
 * -> 4D file
 
 FSL-GUI-STEP: Create General Linear Model (GLM) and the design matrix using FSL GUI
@@ -49,9 +49,9 @@ FSL-GUI-STEP: Create General Linear Model (GLM) and the design matrix using FSL 
 
 5. Run FSL Randomise (https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/Randomise/UserGuide)
 * Randomise.sh - nonparametric permutation inference on neuroimaging data
- * input: fsl merge 4D file
- * output: statistical maps
- * requires a design matrix and a mask
+  * input: fsl merge 4D file
+  * output: statistical maps
+  * requires a design matrix and a mask
 
 6. or run FSL PALM (https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/PALM) <- the final statistical analysis performed in Rakowska et al. (2022)
 * The scripts perform analysis for 3 different quesitons:
@@ -60,9 +60,9 @@ FSL-GUI-STEP: Create General Linear Model (GLM) and the design matrix using FSL 
   * Q3: Control analysis = relationship between microstructural plasticity and participants' sex, baseline performance, and general sleep patterns
 * 4DMerge4PALM.sh the images depending on the question asked. 
 * Q1/S2/Q3script.sh - use FSL PALM to perform Non-Parametric Combination (NPC) for joint inference over multiple modalities (MD and Fr) for each question
- * input: fsl merge 4D file
- * output: statistical mpas
- * requires a design matrix and a mask
+  * input: fsl merge 4D file
+  * output: statistical mpas
+  * requires a design matrix and a mask
 * Datapoints.sh - Extract individual datapoints to check for outliers
 
 # Requirements
