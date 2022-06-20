@@ -19,7 +19,7 @@ Output: Statistical test results for FA (fractional anisotropy), MD (mean diffus
 
 2. FSL DTIfit
 * compute_DTI_martyna - extract shells with b < 1500 (only for multishell data)
-* dtifit_fsl_bmax1500_final.sh - fit DTI tensor
+* dtifit_fsl_bmax1500.sh - fit DTI tensor
 * -> output: MD/FA maps
 
 3. Coregister, normalise, smooth in SPM
@@ -29,8 +29,9 @@ Output: Statistical test results for FA (fractional anisotropy), MD (mean diffus
 * -> output: swFA/MD/FR
 
 4. Prepare images
-* Copy files to the FinalFSLDTI folder (S1, S2, S3), subtract sessions and put the subtraction files in the relevant folders (S1S2, S2S3, S1S3)
-* Merge images into a single 4D file using fslmerge
+* CopyFiles.m - Copy files to the FinalFSLDTI folder (S1, S2, S3)
+* SubtractImages.m - Subtract sessions and put the subtraction files in the relevant folders (S1S2, S2S3, S1S3)
+* 4DMerge.sh - Merge images into a single 4D file using fslmerge
 * The 4D file will be used as the only image for the design matrix so each design matrix needs to have a separate 4D file
 * fslmerge merges the files in its own order, check the order with with ‘ls’. That order needs to match the order of participants in the design matrix
 * -> 4D file
