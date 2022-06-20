@@ -77,13 +77,10 @@ The pipeline requires MATLAB with SPM12 toolbox (https://www.fil.ion.ucl.ac.uk/s
 
 ## Relevant methods section from Rakowska et al. (2022)[^3] :
 
-5.7.2 DW-MRI DATA PRE-PROCESSING
-
-5.7.3.2 MULTIMODAL ANALYSIS
-
-5.7.3.3 UNIMODAL ANALYSIS
-
-5.7.3.4 REGIONS OF INTEREST
+- Section *5.7.2 DW-MRI data pre-processing*
+- Section *5.7.3.2 Multimodal analysis*
+- Section *5.7.3.3 Unimodal analysis*
+- Section *5.7.3.4 Regions Of Interest*
 
 ### References
 [^1]: Tax, C. M., Kleban, E., Chamberland, M., Baraković, M., Rudrapatna, U., & Jones, D. K. (2021). Measuring compartmental T2-orientational dependence in human brain white matter using a tiltable RF coil and diffusion-T2 correlation MRI. NeuroImage, 236, 117967.
