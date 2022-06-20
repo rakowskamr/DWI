@@ -44,13 +44,17 @@ Output: Statistical test results for FA (fractional anisotropy), MD (mean diffus
 * -> design matrix
 
 8. Run FSL Randomise (https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/Randomise/UserGuide)
-* use fsl randomise
 * input: fsl merge 4D file
 * output: output directory
 * requires a design matrix and a mask
 
-9. or run FSL PALM (https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/PALM)
-* use fsl palm
+9. or run FSL PALM (https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/PALM) <- the final statistical analysis performed in Rakowska et al. (2022)
+* The scripts perform analysis for 3 different quesitons:
+  * Q1: Relationship between baseline brain characteristics and TMR susceptibility
+  * Q2: Relationship between microstructural plasticity (patterns across the two MRI markers) and TMR benefit across time
+  * Q3: Control analysis = relationship between microstructural plasticity and participants' sex, baseline performance, and general sleep patterns
+* 4DMerge4PALM the images depending on the question asked. 
+* Q1script/S2scripts/Q3script - use FSL PALM to perform Non-Parametric Combination (NPC) for joint inference over multiple modalities (MD and Fr) for each question
 * input: fsl merge 4D file
 * output: output directory
 * requires a design matrix and a mask
